@@ -239,52 +239,91 @@ def calculatePlan(mapExercises):
 
 def toXlsx():
     # Paso 1: Leer el archivo CSV
-    df = pd.read_csv('output.csv')
     # Paso 2: Crear un archivo Excel
     with pd.ExcelWriter('rutina.xlsx', engine='xlsxwriter') as writer:
-        df_modificado = pd.DataFrame(columns=df.columns)
+        df = pd.read_csv('output.csv')
 
-        # Iterar a través del DataFrame original e insertar filas
-        for index, row in df.iterrows():
-            # Si se encuentra la cadena deseada, insertar una fila vacía
-            if pd.notna(row['week']):
-                df_modificado = df_modificado._append(pd.Series(), ignore_index=True)
-                df_modificado = df_modificado._append(pd.Series([None]*5 + ["comment"], index=df_modificado.columns), ignore_index=True)
-            df_modificado = df_modificado._append(row, ignore_index=True)
-
-        filas_vacias = df_modificado.isna().all(axis=1)
-
-
-        df_modificado.to_excel(writer, sheet_name='Hoja1', index=False,header=False)
-
-        workbook  = writer.book
-        worksheet = writer.sheets['Hoja1']
-
-        formato = workbook.add_format({
-            'border': 1,  # Grosor del borde (1 es el valor predeterminado)
-            'border_color': 'black',  # Color del borde
-            'text_wrap': True,  # Ajuste de texto
-            'valign': 'vcenter',  # Alineación vertical
-            'align': 'center'  # Alineación horizontal
-        })
-
-        num_rows, num_cols = df_modificado.shape
+        # Definir el tamaño de cada segmento
+        tamaño_segmento = 21
+        sizes = []
+        # Crear una lista para almacenar los DataFrames segmentados
+        segmentos = []
+        pos = []
+        current = 1
         cnt = 0
-        for row in range(num_rows):
-            for col in range(num_cols):
-                value = df_modificado.iloc[row, col]
-                if pd.isna(value):
-                    value = ''  # Reemplazar NaN con un string vacío o el valor que prefieras
+        for index, row in df.iterrows():
+            val = row['week']
+            cnt+= 1
+            if val == "Week " + str(current):
+                current = current + 1
+                pos.append(index)
+        pos.append(cnt)
+        for i in range(1, len(pos)):
+            sizes.append(pos[i] - pos[i-1])
+        i = 0
+        # Dividir el DataFrame en segmentos
+        inicio = 0
+        for tamaño in sizes:
+            fin = inicio + tamaño
+            segmento_df = df[inicio:fin]
+            segmentos.append(segmento_df)
+            inicio = fin  # Actualizar el inicio para la próxima iteración
 
-                if filas_vacias.iloc[row]:
-                    # Si la fila está vacía, escribe sin formato
+        # Verificar los segmentos creados
 
-                    worksheet.write(row + 1, col, ' ')
-                else:
-                    worksheet.write(row + 1, col, value, formato)
-    # Guardar el archivo
+
+        for i, segmento in enumerate(segmentos):
+            saveSheet(writer, segmento, "week "+str(i+1))
     writer._save()
 
+
+def saveSheet(writer, df, sheet):
+    df_modificado = pd.DataFrame(columns=df.columns)
+
+    # Iterar a través del DataFrame original e insertar filas
+    for index, row in df.iterrows():
+        # Si se encuentra la cadena deseada, insertar una fila vacía
+        if pd.notna(row['week']):
+            df_modificado = df_modificado._append(pd.Series(), ignore_index=True)
+            df_modificado = df_modificado._append(pd.Series([None] * 5 + ["comment"], index=df_modificado.columns),
+                                                  ignore_index=True)
+        df_modificado = df_modificado._append(row, ignore_index=True)
+
+    filas_vacias = df_modificado.isna().all(axis=1)
+
+    df_modificado.to_excel(writer, sheet_name=sheet, index=False, header=False)
+
+    workbook = writer.book
+    worksheet = writer.sheets[sheet]
+    worksheet.set_column('C:C', 22)  # Establecer el ancho de la Columna1 a 20
+    worksheet.set_column('D:D', 10)
+    worksheet.set_column('F:F', 30)
+
+    formato = workbook.add_format({
+        'border': 1,  # Grosor del borde (1 es el valor predeterminado)
+        'border_color': 'black',  # Color del borde
+        'text_wrap': True,  # Ajuste de texto
+        'valign': 'vcenter',  # Alineación vertical
+        'align': 'center'  # Alineación horizontal
+    })
+
+    num_rows, num_cols = df_modificado.shape
+    cnt = 0
+    for row in range(num_rows):
+        for col in range(num_cols):
+            value = df_modificado.iloc[row, col]
+            if pd.isna(value):
+                value = ''  # Reemplazar NaN con un string vacío o el valor que prefieras
+
+            if filas_vacias.iloc[row]:
+                # Si la fila está vacía, escribe sin formato
+
+                worksheet.write(row + 1, col, ' ')
+            else:
+                worksheet.write(row + 1, col, value, formato)
+
+
+# Guardar el archivo
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     calculatePlan(exercirses)
