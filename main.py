@@ -12,7 +12,7 @@ exercirses = [
     {'name': 'pronated preacher curls', 'bw': 85, 'day': 1, 'reg': False},
     {'name': 'biceps curl', 'bw': 85, 'day': 1, 'reg': False},
 
-    {'name': 'dips', 'rm': 65, 'unit': 'kg', 'bw': 85, 'day': 4, 'reg': True},
+    {'name': 'dips', 'rm': 70, 'unit': 'kg', 'bw': 85, 'day': 4, 'reg': True},
     {'name': 'bench press', 'rm': 90, 'unit': 'kg', 'day': 4, 'reg': False},
     {'name': 'tricep extension', 'bw': 85, 'day': 4, 'reg': False},
     {'name': 'face pulls', 'bw': 85, 'day':4, 'reg': False},
@@ -29,7 +29,7 @@ exercises_2 = [
     {'name': 'biceps curl', 'bw': 85, 'day': 1, 'reg': False},
     {'name': 'running',  'day': 1, 'reg': False},
 
-    {'name': 'dips', 'rm': 37, 'unit': 'lbs', 'bw': 121, 'day': 3, 'reg': True},
+    {'name': 'dips', 'rm': 37, 'unit': 'lbs', 'bw': 121, 'day': 3, 'reg': True, "ceil":5},
     {'name': 'bench press', 'day': 3, 'reg': False},
     {'name': 'tricep extension', 'day': 3, 'reg': False},
     {'name': 'face pulls', 'day': 3, 'reg': False},
