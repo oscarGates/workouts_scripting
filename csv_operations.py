@@ -27,6 +27,7 @@ def createCsv(grupos):
             writer.writerow([])
     print("Archivo CSV creado con éxito.")
 
+
 def createCsvXlsFormat(grupos):
     with open('routines/output.csv', 'w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
@@ -42,10 +43,11 @@ def createCsvXlsFormat(grupos):
                 old_week = week
 
             for value in values:
-                row = ['','',value['name'], str(value['sets']) + 'x' + str(value['reps'])]
-                if str(week)+","+str(day) not in h_set:
-                    h_set.add(str(week)+","+str(day))
-                    row = ['Week ' + str(week),'Day ' + str(day),value['name'], str(value['sets']) + 'x' + str(value['reps'])]
+                row = ['', '', value['name'], str(value['sets']) + 'x' + str(value['reps'])]
+                if str(week) + "," + str(day) not in h_set:
+                    h_set.add(str(week) + "," + str(day))
+                    row = ['Week ' + str(week), 'Day ' + str(day), value['name'],
+                           str(value['sets']) + 'x' + str(value['reps'])]
 
                 if value.get('load'):
                     row.append(str(value['load']) + str(value['unit']))
