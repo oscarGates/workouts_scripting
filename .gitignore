@@ -1,2 +1,3 @@
 # .gitignore
-routines/*
+routines/output.csv
+routines/rutina.xlsx
