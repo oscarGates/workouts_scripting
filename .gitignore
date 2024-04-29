@@ -1,5 +1,2 @@
-# .gitignore
-routines/output.csv
-routines/rutina.xlsx
-**/routines/output.csv
-**/routines/rutina.xlsx
+**/output.csv
+**/rutina.xlsx
