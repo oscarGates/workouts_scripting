@@ -1,8 +1,7 @@
-import pandas as pd
-from exercise_calculations import ceil_to_increment, calculate_nRM, calculate_load_strength, calculate_plan_strength, \
+from twelve_weeks_program.operations.exercise_calculations import ceil_to_increment, calculate_plan_strength, \
     group_exercises
-from csv_operations import createCsvXlsFormat
-from sheet_convertions import toXlsx
+from twelve_weeks_program.operations.csv_operations import createCsvXlsFormat
+from twelve_weeks_program.operations.sheet_convertions import toXlsx
 
 exercises = [
     {'name': 'pull ups', 'rm': 37.5, 'unit': 'kg', 'bw': 85, 'day': 2, 'reg': True},
@@ -17,7 +16,7 @@ exercises = [
     {'name': 'one arm over head press', 'bw': 85, 'day': 1, 'reg': False},
     {'name': 'shoulder rotation', 'bw': 85, 'day': 1, 'reg': False},
 
-    {'name': 'dips', 'rm': 67.5, 'unit': 'kg', 'bw': 85, 'day': 4, 'reg': True},
+    {'name': 'dips', 'rm': 72, 'unit': 'kg', 'bw': 85, 'day': 4, 'reg': True},
     {'name': 'bench press', 'sets': 4, 'unit': 'kg', 'day': 4, 'reg': False},
     {'name': 'dumbbell press', 'bw': 85, 'day': 4, 'reg': False},
     {'name': 'triceps extension', 'bw': 85, 'day': 4, 'reg': False},
