@@ -3,8 +3,8 @@ import pandas as pd
 def toXlsx():
     # Paso 1: Leer el archivo CSV
     # Paso 2: Crear un archivo Excel
-    with pd.ExcelWriter('routines/rutina.xlsx', engine='xlsxwriter') as writer:
-        df = pd.read_csv('routines/output.csv')
+    with pd.ExcelWriter('twelve_weeks_program/routines/rutina.xlsx', engine='xlsxwriter') as writer:
+        df = pd.read_csv('twelve_weeks_program/routines/output.csv')
 
         # Definir el tamaño de cada segmento
         tamaño_segmento = 21
