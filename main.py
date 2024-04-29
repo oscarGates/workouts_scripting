@@ -1,46 +1,47 @@
 import pandas as pd
-import numpy as np
 
-exercirses = [
-    {'name': 'pull ups', 'rm': 47.5, 'unit': 'kg', 'bw': 85, 'day': 2, 'reg': True },
-    {'name': 'pendley row', 'rm': 50, 'unit': 'kg', 'day': 2, 'reg': False, 'ceil':5},
-    {'name': 'shoulder rotation', 'bw': 85, 'day': 2, 'reg': False},
-    {'name': 'ab roller', 'bw': 85, 'day': 2, 'reg': False},
+exercises = [
+    {'name': 'pull ups', 'rm': 37.5, 'unit': 'kg', 'bw': 85, 'day': 2, 'reg': True },
+    {'name': 'one arm row', 'sets':4,'unit': 'kg', 'day': 2, 'reg': False, 'ceil':5},
+    {'name': 'one arm lat pull down', 'bw': 85, 'day': 2, 'reg': False},
+    {'name': 'preacher curl', 'bw': 85, 'day': 2, 'reg': False},
+    {'name': 'reverse curl', 'bw': 85, 'day': 2, 'reg': False},
 
-    {'name': 'military press', 'rm': 172, 'unit': 'lbs',  'day': 1, 'reg': True, 'ceil':5},
-    {'name': 'lu raises', 'bw': 85, 'day': 1, 'reg': False},
-    {'name': 'pronated preacher curls', 'bw': 85, 'day': 1, 'reg': False},
-    {'name': 'biceps curl', 'bw': 85, 'day': 1, 'reg': False},
+    {'name': 'over head press', 'rm': 165, 'unit': 'lbs',  'day': 1, 'reg': True, 'ceil':5},
+    {'name': 'lateral raises', 'sets':4,'bw': 85, 'day': 1, 'reg': False},
+    {'name': 'dumbbell press', 'bw': 85, 'day': 1, 'reg': False},
+    {'name': 'one arm over head press', 'bw': 85, 'day': 1, 'reg': False},
+    {'name': 'shoulder rotation', 'bw': 85, 'day': 1, 'reg': False},
 
-    {'name': 'dips', 'rm': 70, 'unit': 'kg', 'bw': 85, 'day': 4, 'reg': True},
-    {'name': 'bench press', 'rm': 90, 'unit': 'kg', 'day': 4, 'reg': False},
-    {'name': 'tricep extension', 'bw': 85, 'day': 4, 'reg': False},
+    {'name': 'dips', 'rm': 67.5, 'unit': 'kg', 'bw': 85, 'day': 4, 'reg': True},
+    {'name': 'bench press', 'sets':4, 'unit': 'kg', 'day': 4, 'reg': False},
+    {'name': 'dumbbell press','bw': 85, 'day': 4, 'reg': False},
+    {'name': 'triceps extension', 'bw': 85, 'day': 4, 'reg': False},
     {'name': 'face pulls', 'bw': 85, 'day':4, 'reg': False},
 
-    {'name': 'squat', 'rm': 190, 'unit': 'lbs',  'day': 3, 'reg': True, 'ceil': 5},
-    {'name': 'barbell romanian dead lift', 'rm': 60, 'unit': 'kg', 'day': 3, 'reg': False, 'ceil':5},
+    {'name': 'squat', 'rm': 210, 'unit': 'lbs',  'day': 3, 'reg': True, 'ceil': 5},
+    {'name': 'bulgarian', 'sets':5,'unit': 'kg', 'day': 3, 'reg': False, 'ceil': 5},
+    {'name': 'barbell romanian dead lift', 'unit': 'kg', 'day': 3, 'reg': False, 'ceil':5},
     {'name': 'hamstring curls', 'bw': 85, 'day': 3, 'reg': False},
-    {'name': 'jump rope', 'bw': 85, 'day': 3, 'reg': False},
-
     ]
 exercises_2 = [
-    {'name': 'pull ups', 'rm': 2, 'unit': 'lbs', 'bw': 121, 'day': 1, 'reg': True, 'ceil':5},
+    {'name': 'pull ups', 'rm': 12, 'unit': 'lbs', 'bw': 121, 'day': 1, 'reg': True, 'ceil':5},
     {'name': 'barbel row',  'day': 1, 'reg': False, 'ceil':5},
     {'name': 'biceps curl', 'bw': 85, 'day': 1, 'reg': False},
     {'name': 'running',  'day': 1, 'reg': False},
 
-    {'name': 'dips', 'rm': 37, 'unit': 'lbs', 'bw': 121, 'day': 3, 'reg': True, "ceil":5},
+    {'name': 'dips', 'rm': 25, 'unit': 'lbs', 'bw': 121, 'day': 3, 'reg': True, "ceil":5},
     {'name': 'bench press', 'day': 3, 'reg': False},
     {'name': 'tricep extension', 'day': 3, 'reg': False},
     {'name': 'face pulls', 'day': 3, 'reg': False},
     {'name': 'running', 'day': 3, 'reg': False},
 
-    {'name': 'squat', 'rm': 70, 'unit': 'kg', 'day': 2, 'reg': True, 'ceil': 2.5},
+    {'name': 'squat', 'rm': 65.0, 'unit': 'kg', 'day': 2, 'reg': True, 'ceil': 2.5},
     {'name': 'hip thrust', 'unit': 'kg', 'day': 2, 'reg': False, 'ceil': 5},
     {'name': 'hamstring curls',  'day': 2, 'reg': False},
     {'name': 'plank', 'day': 2, 'reg': False},
 
-    {'name': 'leg press', 'rm': 145, 'unit': 'kg', 'day': 4, 'reg': True, 'ceil': 10},
+    {'name': 'leg press', 'rm': 180, 'unit': 'kg', 'day': 4, 'reg': True, 'ceil': 10},
     {'name': 'hip thrust',  'unit': 'kg', 'day': 4, 'reg': False, 'ceil': 5},
     {'name': 'hip extension', 'day': 4, 'reg': False},
     {'name': 'plank','day': 4, 'reg': False},
@@ -130,15 +131,20 @@ def twelve_weeks_strength(exercises):
         bw = 0
         if(exercise.get('bw') is not None):
             bw = exercise['bw']
+
+        sets = '3-4'
+        if exercise.get('sets') is not None:
+            sets = exercise['sets']
+
         for i in range(12):
             if not is_accessory and rm != 0:
                 plan.append(
-                    {'sets': '3-4', 'reps': weeks_reps_access[i], 'load': ceil_to_increment((rm+bw)*weeks_load_access[i]-bw, ceil), 'unit': unit,
+                    {'sets': sets, 'reps': weeks_reps_access[i], 'load': ceil_to_increment((rm+bw)*weeks_load_access[i]-bw, ceil), 'unit': unit,
                       'name': name, 'week': (i + 1),'day': day, 'reg': is_accessory})
                 continue
             if not is_accessory:
                 plan.append(
-                    {'sets': '3-4', 'reps': weeks_reps_access[i],
+                    {'sets': sets, 'reps': weeks_reps_access[i],
                       'name': name, 'week': (i + 1),'day': day, 'reg': is_accessory})
                 continue
             if i == 10:
@@ -326,7 +332,7 @@ def saveSheet(writer, df, sheet):
 # Guardar el archivo
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    calculatePlan(exercirses)
+    calculatePlan(exercises_2)
     toXlsx()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
