@@ -3,8 +3,8 @@ import pandas as pd
 def toXlsx():
     # Paso 1: Leer el archivo CSV
     # Paso 2: Crear un archivo Excel
-    with pd.ExcelWriter('twelve_weeks_program/routines/rutina.xlsx', engine='xlsxwriter') as writer:
-        df = pd.read_csv('twelve_weeks_program/routines/output.csv')
+    with pd.ExcelWriter('../routines/rutina.xlsx', engine='xlsxwriter') as writer:
+        df = pd.read_csv('../routines/output.csv')
 
         # Definir el tamaño de cada segmento
         tamaño_segmento = 21
@@ -56,50 +56,14 @@ def saveSheet(writer, df, sheet):
 
     workbook = writer.book
     worksheet = writer.sheets[sheet]
-    worksheet.set_column('C:C', 22)  # Establecer el ancho de la Columna1 a 20
+    worksheet.set_column('C:C', 22)
     worksheet.set_column('D:D', 10)
     worksheet.set_column('F:F', 30)
 
-    formato = workbook.add_format({
-        'bold': False,  # Negrita
-        'text_wrap': True,  # Ajuste de texto
-        'valign': 'vcenter',  # Alineación vertical
-        'align': 'center'  # Alineación horizontal
-    })
-
-    formato_comentario = workbook.add_format({
-        'bold': False,  # Negrita
-        'text_wrap': True,  # Ajuste de texto
-        'valign': 'vcenter',  # Alineación vertical
-        'align': 'center',  # Alineación horizontal
-        'bg_color': 'yellow',  # Color de fondo
-        'border': 1,  # Grosor del borde (1 es el valor predeterminado)
-        'border_color': 'black'  # Color del borde
-    })
-
-    formato_comentario.set_text_wrap()
-    formato_comentario.set_align('center')
-    formato_comentario.set_align('vcenter')
-
-    formato_comentario.set_border(1)
-    formato_comentario.set_border_color('black')
-
-    formato.set_text_wrap()
-    formato.set_align('center')
-    formato.set_align('vcenter')
-
-    formato.set_border(1)
-    formato.set_border_color('black')
-
-    worksheet.set_row(0, 30, formato_comentario)
-
     for i, row in df_modificado.iterrows():
-        if filas_vacias.iloc[i]:
-            worksheet.set_row(i + 1, 30)
-        else:
-            worksheet.set_row(i + 1, 30, formato)
+        worksheet.set_row(i + 1, 20)
 
-    # Formato de celdas
+
     formato = workbook.add_format({
         'border': 1,  # Grosor del borde (1 es el valor predeterminado)
         'border_color': 'black',  # Color del borde
@@ -109,17 +73,15 @@ def saveSheet(writer, df, sheet):
     })
 
     num_rows, num_cols = df_modificado.shape
-    cnt = 0
     for row in range(num_rows):
         for col in range(num_cols):
             value = df_modificado.iloc[row, col]
             if pd.isna(value):
-                value = ''  # Reemplazar NaN con un string vacío o el valor que prefieras
-
+                value = ''
             if filas_vacias.iloc[row]:
-                # Si la fila está vacía, escribe sin formato
-
                 worksheet.write(row + 1, col, ' ')
             else:
-                worksheet.write(row + 1, col, value, formato)
-
+                if col < num_cols :
+                    worksheet.write(row + 1, col, value, formato)
+                else:
+                    worksheet.write(row + 1, col, value)

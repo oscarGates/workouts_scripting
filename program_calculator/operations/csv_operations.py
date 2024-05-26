@@ -1,7 +1,9 @@
 import csv
+import os
+
 
 def createCsv(grupos):
-    with open('twelve_weeks_program/routines/output.csv', 'w', newline='', encoding='utf-8') as file:
+    with open('../routines/output.csv', 'w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         old_week = 0
         # Escribir los datos
@@ -29,7 +31,8 @@ def createCsv(grupos):
 
 
 def createCsvXlsFormat(grupos):
-    with open('twelve_weeks_program/routines/output.csv', 'w', newline='', encoding='utf-8') as file:
+    os.makedirs('../routines', exist_ok=True)
+    with open('../routines/output.csv', 'w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         writer.writerow(['week', 'day', 'exercise', 'sets-reps', 'weight', 'comment'])
 

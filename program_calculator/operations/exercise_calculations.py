@@ -1,6 +1,12 @@
 import math
 from collections import defaultdict
 
+weeks_reps = [12, 10, 8, 8, 6, 5, 4, 4, 3, 2, 1, 1]
+weeks_load = [0.6, 0.65, 0.7, 0.65, 0.75, 0.8, 0.85, 0.8, 0.88, 0.92, 1, 0.9]
+weeks_load_access = [0.6, 0.6, 0.6, 0.6, 0.65, 0.65, 0.65, 0.65, 0.7, 0.7, 0.7, 0.7]
+weeks_sets = [4, 4, 4, 3, 4, 4, 4, 3, 3, 3, 1, 3]
+has_plus_set = [True, True, True, False, True, True, True, False, False, False, True, False]
+
 
 def ceil_to_increment(number, increment):
     cil = math.ceil(number / increment) * increment
@@ -9,7 +15,6 @@ def ceil_to_increment(number, increment):
         return cil
     else:
         return flr
-    # return math.ceil(number / increment) * increment
 
 
 def calculate_nRM(one_rm, n):
@@ -22,7 +27,7 @@ def calculate_load_strength(rm, bw, weeks_load, ceil):
     return ceil_to_increment((rm + bw) * weeks_load - bw, ceil)
 
 
-def calculate_plan_strength(exercise, weeks_reps, weeks_load, weeks_load_access, weeks_sets, has_plus_set, ceil):
+def calculate_plan_strength(exercise, ceil):
     weeks_reps_access = ['12-15', '12-15', '12-15', '12-15', '8-12', '8-12', '8-12', '8-12', '5-8', '5-8', '5-8', '5-8']
     plan = []
     rm = 0
